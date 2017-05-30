@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-05-30T10:50:51+08:00</updated>
+  <updated>2017-05-30T18:17:20+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -57,6 +57,9 @@
 <li>一条命令直接推送到github，简单方便。</li>
 <li>通过git进行版本管理，不用担心内容丢失。</li>
 </ul>
+
+
+<!--more-->
 
 
 <h3>基本知识</h3>
