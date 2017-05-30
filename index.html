@@ -9,8 +9,7 @@
   <meta name="author" content="十八">
 
   
-  <meta name="description" content="1. 介绍 octopress是基于Jekyll的静态博客系统。他有几个好处: 兼容github page, 不用再申请博客空间了。直接用github的repository就可以。博客的结尾是用户名.github.io
-用户只需要编写markdown格式的文章， &hellip;">
+  <meta name="description" content="提高网站访问速度 替换jquery的原始地址 因为原始地址是google的，所以中国这边完全访问不了，所以直接替换成比较快的镜像 打开octopress的根目录，编辑source/_includes/head.html，找到下面的代码行，将jquery的地址替换成code.jquery. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/05/30/octopress-tips/">Octopress Tips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-05-30T10:34:53+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:34 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>提高网站访问速度</h2>
+
+<h3>替换jquery的原始地址</h3>
+
+<p>因为原始地址是google的，所以中国这边完全访问不了，所以直接替换成比较快的镜像</p>
+
+<p>打开octopress的根目录，编辑<code>source/_includes/head.html</code>，找到下面的代码行，将jquery的地址替换成code.jquery.com的地址:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">-  &lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="gi">+  &lt;script src=&quot;//code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>关闭tweet插件</h3>
+
+<p>编辑配置文件<code>_config.yml</code>，将twitter_tweet_button的配置改成<code>false</code></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -458,6 +503,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/05/30/octopress-tips/">Octopress Tips</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/05/28/ubuntu-14-dot-04shang-an-zhuang-octopress/">Ubuntu 14.04上安装Octopress</a>

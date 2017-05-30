@@ -4,7 +4,7 @@
   <title><![CDATA[十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-05-29T23:04:36+08:00</updated>
+  <updated>2017-05-30T10:43:44+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress Tips]]></title>
+    <link href="http://rainyfeeling.github.io/blog/2017/05/30/octopress-tips/"/>
+    <updated>2017-05-30T10:34:53+08:00</updated>
+    <id>http://rainyfeeling.github.io/blog/2017/05/30/octopress-tips</id>
+    <content type="html"><![CDATA[<h2>提高网站访问速度</h2>
+
+<h3>替换jquery的原始地址</h3>
+
+<p>因为原始地址是google的，所以中国这边完全访问不了，所以直接替换成比较快的镜像</p>
+
+<p>打开octopress的根目录，编辑<code>source/_includes/head.html</code>，找到下面的代码行，将jquery的地址替换成code.jquery.com的地址:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">-  &lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="gi">+  &lt;script src=&quot;//code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>关闭tweet插件</h3>
+
+<p>编辑配置文件<code>_config.yml</code>，将twitter_tweet_button的配置改成<code>false</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu 14.04上安装Octopress]]></title>
