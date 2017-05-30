@@ -4,7 +4,7 @@
   <title><![CDATA[十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-05-30T10:43:44+08:00</updated>
+  <updated>2017-05-30T10:50:51+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -36,6 +36,14 @@
 <h3>关闭tweet插件</h3>
 
 <p>编辑配置文件<code>_config.yml</code>，将twitter_tweet_button的配置改成<code>false</code></p>
+
+<h3>关于markdown格式的文档:</h3>
+
+<ul>
+<li><a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">https://help.github.com/articles/basic-writing-and-formatting-syntax/</a></li>
+<li><a href="https://guides.github.com/features/mastering-markdown/">https://guides.github.com/features/mastering-markdown/</a></li>
+</ul>
+
 ]]></content>
   </entry>
   
