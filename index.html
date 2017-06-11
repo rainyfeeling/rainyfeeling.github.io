@@ -9,7 +9,7 @@
   <meta name="author" content="十八">
 
   
-  <meta name="description" content="tmux介绍 tmux是一个多窗口终端工具，可以同时在多个终端(窗口)来回切换。而且还可以管理各个窗口，在窗口里面分屏等等。 tmux里面的基本概念有: session, window和panel 比如执行tmux命令，就产生产一个新的session。如果这时再执行创建窗口操作CTRL+B, C &hellip;">
+  <meta name="description" content="tmux介绍 tmux是一个多窗口终端工具，可以同时在多个终端(窗口)来回切换。而且还可以管理各个窗口，在窗口里面分屏等等。 tmux里面的基本概念有: session, window和pane 比如执行tmux命令，就产生产一个新的session。如果这时再执行创建窗口操作CTRL+b, c, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,12 +91,12 @@
 
 <p>tmux是一个多窗口终端工具，可以同时在多个终端(窗口)来回切换。而且还可以管理各个窗口，在窗口里面分屏等等。</p>
 
-<p>tmux里面的基本概念有: session, window和panel</p>
+<p>tmux里面的基本概念有: session, window和pane</p>
 
-<p>比如执行tmux命令，就产生产一个新的session。如果这时再执行创建窗口操作<code>CTRL+B, C</code>, 就会创建一个新window，这个window是属于当前session的。
-再执行分屏操作<code>CTRL+B, %</code>就新建了一个panel。</p>
+<p>比如执行tmux命令，就产生产一个新的session。如果这时再执行创建窗口操作<code>CTRL+b, c</code>, 就会创建一个新window，这个window是属于当前session的。
+再执行分屏操作<code>CTRL+b, %</code>就新建了一个pane。</p>
 
-<p>所以基本就是一个session可以包含很多window(窗口),  一个window(窗口)又可以包含多个panel。</p>
+<p>所以基本就是一个session可以包含很多window(窗口),  一个window(窗口)又可以包含多个pane。</p>
 
 </div>
   
@@ -130,7 +130,62 @@
   </header>
 
 
-  <div class="entry-content"><h2>替换jquery的原始地址，用镜像地址来提高网站访问速度</h2>
+  <div class="entry-content"><h2>写博客的基本流程</h2>
+
+<p>首先运行octopress里面的<code>rake preview</code>和<code>rake watch</code>。查看log运行正常，下面的log就表示运行正常:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>➜  octopress rake watch
+</span><span class='line'>Starting to watch <span class="nb">source </span>with Jekyll and Compass.
+</span><span class='line'>
+</span><span class='line'>&gt;&gt;&gt; Compass is watching <span class="k">for</span> changes. Press Ctrl-C to Stop.
+</span><span class='line'>
+</span><span class='line'>Configuration file: /home/josh/work/blogger/octopress/_config.yml
+</span><span class='line'>            Source: <span class="nb">source</span>
+</span><span class='line'><span class="nb">       </span>Destination: public
+</span><span class='line'>      Generating...
+</span><span class='line'>                    <span class="k">done</span>.
+</span><span class='line'> Auto-regeneration: enabled <span class="k">for</span> <span class="s1">&#39;source&#39;</span>
+</span><span class='line'>    write public/stylesheets/screen.css
+</span><span class='line'>      Regenerating: <span class="m">1</span> file<span class="o">(</span>s<span class="o">)</span> changed at 2017-06-11 10:20:43 ...done in 0.44646012 seconds.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后用浏览器打开<code>localhost:4000</code>，按<code>F5</code>刷新查看效果</p>
+
+<p>现在可以用文本编辑器打开source目录下面的markdown文章开始编辑</p>
+
+<p>编辑文章存盘的时候，一定要确认<code>rake watch</code>那边的log里出现</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Regenerating: <span class="m">1</span> file<span class="o">(</span>s<span class="o">)</span> changed at 2017-06-11 10:20:43 ...done in 0.44646012 seconds.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果没有出现上面的log则表示octopress发现你的文章里面有错误，所以没有生成出新的博客。比如下面的例子表示出错:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>   Error: Pygments can<span class="err">&#39;</span>t parse unknown language: &lt;/p&gt;.
+</span><span class='line'>   Error: Run jekyll build --trace <span class="k">for</span> more information.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个时候你需要重新编辑你的文章，修复错误。</p>
+
+<h2>用jquery的镜像地址来提高网站访问速度</h2>
 
 <p>因为原始地址是google的，所以中国这边完全访问不了，所以直接替换成比较快的镜像</p>
 
