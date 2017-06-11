@@ -4,7 +4,7 @@
   <title><![CDATA[十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-06-11T10:38:38+08:00</updated>
+  <updated>2017-06-11T23:10:55+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -12,6 +12,377 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tmux高级部分]]></title>
+    <link href="http://rainyfeeling.github.io/blog/2017/05/30/tmuxgao-ji-bu-fen/"/>
+    <updated>2017-05-30T17:53:07+08:00</updated>
+    <id>http://rainyfeeling.github.io/blog/2017/05/30/tmuxgao-ji-bu-fen</id>
+    <content type="html"><![CDATA[<h2>0. 准备</h2>
+
+<p>为了更好的理解session和window，我们再次回顾一下前面一篇文章里面的基本用法</p>
+
+<ul>
+<li>首先，确认你没有打开任何tmux窗口。如果打开了，请在打开的tmux打开的所有窗口里面执行<code>exit</code>命令，保证我们退出了所有tmux窗口。</li>
+<li>接下来按快捷键<code>CTRL+ALT+t</code>打开一个terminal，然后执行<code>tmux</code>创建一个session</li>
+<li>按<code>CTRL+b, %</code>在当前窗口水平分屏，创建一个新的pane</li>
+<li>按<code>CTRL+b, "</code>在当前窗口垂直分屏，创建一个新的pane</li>
+<li>按<code>CTRL+b, c(reate)</code>创建新的窗口</li>
+</ul>
+
+
+<h2>1. session</h2>
+
+<p>这时我们运行下面的命令来列出当前的session信息</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 列出所有的session</span>
+</span><span class='line'><span class="nv">$ </span>tmux ls
+</span><span class='line'>0: <span class="m">2</span> windows <span class="o">(</span>created Tue May <span class="m">30</span> 17:23:49 2017<span class="o">)</span> <span class="o">[</span>80x23<span class="o">]</span> <span class="o">(</span>attached<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>我们分析一下输出信息:
+
+<ul>
+<li>一行就是现在有一个session</li>
+<li>在<code>:</code>前面的字串是这个session的名字。也就是<code>0</code></li>
+<li>这个session有2个窗口</li>
+<li>后面有这个session创建的时间，和窗口的大小</li>
+<li><code>(attached)</code> : 表示这个session现在运行在前台。是可以看得到的。</li>
+</ul>
+</li>
+</ul>
+
+
+<!--more-->
+
+
+<p>接下来，我们运行一条脚本，每一秒钟打印一个信息，而且不会停止。(只有按<code>CTRL+c</code>才能停止这条脚本)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="k">while</span> <span class="nb">true</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="sb">`</span>date<span class="sb">`</span><span class="p">;</span> sleep 1<span class="p">;</span> <span class="k">done</span>
+</span><span class='line'>2017年 05月 30日 星期二 18:03:09 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:03:10 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:03:11 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:03:12 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:03:13 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:03:14 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:03:15 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:03:16 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:03:17 CST
+</span><span class='line'>... ...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在按下快捷键<code>CTRL+b, d</code>来做detach的动作。也就是让tmux的session运行在后台状态。</p>
+
+<p>按完发现命令行的log如下:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tmux
+</span><span class='line'><span class="o">[</span>detached<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而且tmux的状态栏也不见了。再运行session查看命令:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tmux ls
+</span><span class='line'>0: <span class="m">2</span> windows <span class="o">(</span>created Tue May <span class="m">30</span> 17:23:49 2017<span class="o">)</span> <span class="o">[</span>80x23<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>后面的<code>(attached)</code>不见了。这个就是说明当前有一个session, 名字是<code>0</code>，包含2个窗口。而且现在运行在后台。</p>
+
+<p>接下来，我们运行attach命令，将这个session带到前台, 这里我们用到了<code>-t</code>参数，表target的意思。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># tmux attach到名字为0的session</span>
+</span><span class='line'>tmux attach -t 0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行完命令发现tmux又回来了，而且可以发现这条打印时间的命令一直在后台运行，detach不会影响它的执行。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="k">while</span> <span class="nb">true</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="sb">`</span>date<span class="sb">`</span><span class="p">;</span> sleep 1<span class="p">;</span> <span class="k">done</span>
+</span><span class='line'>2017年 05月 30日 星期二 18:03:09 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:10 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:11 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:12 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:13 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:14 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:15 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:16 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:17 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:18 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:19 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:20 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:21 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:22 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:23 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:24 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:25 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:26 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:27 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:28 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:29 CST
+</span><span class='line'>2017年 05月 30日 星期二 18:08:30 CST
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>好，现在可以按<code>CTRL+c</code>来停止打印时间的脚本。</p>
+
+<h2>2. window (窗口)</h2>
+
+<p>运行下面的tmux命令列出所有的窗口信息</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tmux list-windows
+</span><span class='line'>0: ~- <span class="o">(</span><span class="m">3</span> panes<span class="o">)</span> <span class="o">[</span>80x23<span class="o">]</span> <span class="o">[</span>layout 837a,80x23,0,0<span class="o">{</span>40x23,0,0,0,39x23,41,0<span class="o">[</span>39x11,41,0,1,39x11,41,12,2<span class="o">]}]</span> @0
+</span><span class='line'>1: tmux* <span class="o">(</span><span class="m">1</span> panes<span class="o">)</span> <span class="o">[</span>80x23<span class="o">]</span> <span class="o">[</span>layout ae60,80x23,0,0,3<span class="o">]</span> @1 <span class="o">(</span>active<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们分析一下输出信息:</p>
+
+<ul>
+<li>一行就是现在有一个窗口, 窗口里面可以有多个pane。当前session有两个窗口，其中一个窗口有3个pane。另外一个窗口只有1个pane</li>
+<li>在<code>:</code>前面的数字是这个窗口的id。可以通过按<code>CTRL+b, 数字</code>开切换当前窗口</li>
+<li><code>(active)</code> : 表示当前窗口是1</li>
+</ul>
+
+
+<h2>3. 一些结论</h2>
+
+<ul>
+<li>tmux session可以包含一系列窗口，窗口可以包含多个pane
+
+<ul>
+<li><code>tmux ls</code>: 可以列出当前所有的session的信息，包括前台的(attached)和后台的(detached)</li>
+</ul>
+</li>
+<li>首先创建session，然后才能创建窗口</li>
+<li>运行<code>tmux</code>命令就是创建一个session，同时这个session只有一个窗口</li>
+<li>在tmux的当前session里，可以按<code>CTRL+b, d</code>来做detach，使其运行在后台</li>
+<li>session在后台也还是运行状态</li>
+<li>tmux 可以用attach命令将某个session运行在前台
+
+<ul>
+<li><code>tmux attach -t &lt;session name&gt;</code></li>
+</ul>
+</li>
+<li>只能有一个前台session</li>
+<li>因为session里面是运行着的任务，所以在系统重启之后，这些运行着的任务会全部清除</li>
+</ul>
+
+
+<h2>4. tmux脚本化</h2>
+
+<p>通过tmux的命令可以做一些订制和自动化。比如:</p>
+
+<ul>
+<li>可以让tmux创建一个session，里面可以创建几个运行的任务。</li>
+<li>可以让tmux自动创建几个窗口，每个窗口都在不同的路径下</li>
+</ul>
+
+
+<h3>a) 关于session的命令行参数</h3>
+
+<ul>
+<li><code>new-session</code>: 创建新的session
+
+<ul>
+<li><code>-s 名字</code>: 指定创建session的名字</li>
+<li><code>-d</code>: 表示创建一个在后台的session。只能用<code>tmux ls</code>才能看得到。</li>
+<li><code>"shell命令"</code>: 可以在后面跟一系列的shell命令,要用单引号或者双引号括起来。</li>
+<li>实例:</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 创建一个新的session，名字叫做octopress。</span>
+</span><span class='line'><span class="c"># 同时在这个session里面执行命令: cd ~/work/blogger/octopress; rake preview</span>
+</span><span class='line'>tmux new-session -s octopress <span class="s1">&#39;cd ~/work/blogger/octopress; rake preview&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>attach</code>: 把后台的session运行到前台
+
+<ul>
+<li><code>-t 名字</code>: 指定target session的名字</li>
+<li>实例:</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 这条命令跟上面基本一样，只是多了-d参数，表示创建的session是在后台，只能用tmux ls才能看到</span>
+</span><span class='line'>tmux new-session -s octopress -d <span class="s1">&#39;cd ~/work/blogger/octopress; rake preview&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 将上面的创建的后台session变成前台</span>
+</span><span class='line'>tmux attach -t octopress
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>b) 关于窗口的命令行参数 (窗口的命令必须在tmux的session当中才能开始运行)</h3>
+
+<ul>
+<li><code>new-window</code>: 创建新的窗口
+
+<ul>
+<li><code>-c 目录名</code>: 表示到某个目录下。举例: <code>tmux new-window -c ~/work</code>表示打开一个新窗口，并且新窗口的目录为<code>~/work</code>。然后切换当前窗口到新建窗口。</li>
+<li><code>-d</code>: 表示执行命令后，不要改变当前窗口。举例: <code>tmux new-window -c ~/work -d</code> 基本跟上面的命令一样，唯一的区别是，不要切换当前窗口到新窗口。</li>
+<li><code>"shell命令"</code>: 在窗口里执行的命令, 要用单引号或者双引号括起来。
+
+<ul>
+<li>注意: 如果命令是当场返回的话，则窗口在命令返回时就会退出。所以看起来没有效果。</li>
+</ul>
+</li>
+<li>实例:</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 创建一个tmux session</span>
+</span><span class='line'>tmux
+</span><span class='line'>
+</span><span class='line'><span class="c"># 在当前session里面创建一个新窗口，路径是~/work/blogger/octopress，同时执行yes命令</span>
+</span><span class='line'>tmux new-window -c ~/work/blogger/octopress <span class="s1">&#39;yes&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 在当前session里面创建一个新窗口, 运行yes命令，同时不要切换到那个窗口</span>
+</span><span class='line'>tmux new-window -d -c ~/work/blogger/octopress <span class="s1">&#39;yes&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p><code>split-window</code>: 在当前窗口里创建一个pane</p></li>
+<li><p>tmux的窗口和session命令可以连着用，但是中间要用<code>\;</code>隔开。实例:</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 创建一个名字叫做octopress的新session。在默认窗口里执行rake preview命令。同时在创建一个pane。里面执行rake watch命令。最后在新建一个新窗口</span>
+</span><span class='line'>tmux new-session -s octopress <span class="s1">&#39;cd ~/work/blogger/octopress; rake preview&#39;</span> <span class="se">\;</span> split-window <span class="s1">&#39;cd ~/work/blogger/octopress;rake watch&#39;</span> <span class="se">\;</span> new-window
+</span><span class='line'>
+</span><span class='line'><span class="c"># 创建两个新窗口打开不同的路径</span>
+</span><span class='line'>tmux new-window -c ~/work <span class="se">\;</span> new-window -c ~/work/blogger
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. 脚本实例</h2>
+
+<h3>我自己的octopress博客的自动化tmux脚本</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">OCTOPRESS_PATH</span><span class="o">=</span><span class="s2">&quot;/home/josh/work/blogger/octopress&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># create a tmux session, which running the octopress with preview and watch</span>
+</span><span class='line'>tmux new-session -s octopress -d <span class="s2">&quot;cd ${OCTOPRESS_PATH}; rake preview&quot;</span> <span class="se">\;\</span>
+</span><span class='line'>     split-window             -d <span class="s2">&quot;cd ${OCTOPRESS_PATH}; rake watch&quot;</span> <span class="se">\;</span>  <span class="se">\</span>
+</span><span class='line'>     new-window -c <span class="k">${</span><span class="nv">OCTOPRESS_PATH</span><span class="k">}</span>/_deploy <span class="se">\;</span>             <span class="se">\</span>
+</span><span class='line'>     new-window -c <span class="k">${</span><span class="nv">OCTOPRESS_PATH</span><span class="k">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># open local server</span>
+</span><span class='line'>opera http://localhost:4000 <span class="p">&amp;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># open sublime edit the posts</span>
+</span><span class='line'>subl <span class="nv">$OCTOPRESS_PATH</span>/source/_posts/2017*.markdown
+</span><span class='line'>
+</span><span class='line'>tmux attach -t octopress
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>有人写了一个tmux session的保存和读取的脚本。大家可以参考一下</h3>
+
+<ul>
+<li><a href="https://github.com/mislav/dotfiles/blob/d2af5900fce38238d1202aa43e7332b20add6205/bin/tmux-session">此脚本</a>可以在系统重启之后，restore整个session。但是仔细看代码可以发现，restore的session只是把每个窗口所在的目录记录下来而已。</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tmux简明介绍]]></title>
