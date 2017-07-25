@@ -4,7 +4,7 @@
   <title><![CDATA[十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-06-11T23:10:55+08:00</updated>
+  <updated>2017-07-25T23:48:42+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[羽毛球小球技巧]]></title>
+    <link href="http://rainyfeeling.github.io/blog/2017/07/25/yu-mao-qiu-xiao-qiu-ji-qiao/"/>
+    <updated>2017-07-25T23:29:40+08:00</updated>
+    <id>http://rainyfeeling.github.io/blog/2017/07/25/yu-mao-qiu-xiao-qiu-ji-qiao</id>
+    <content type="html"><![CDATA[<p><em>小球技巧:</em></p>
+
+<ul>
+<li>上半身稳定，接球时不要有顿挫，不要急。接球时重心在前。上半身稳定是接小球稳定的前提。</li>
+<li>以左脚为轴移动。做走动的步伐，而不是跑动的或者跳动的步伐。步伐要求放松，从容，争取走到往前。接球后，不要大幅回收(双打不需要)</li>
+<li>双手平抬。持拍手伸直，手腕放松，高过网。</li>
+<li>球拍指向球网，并与手腕有个向下30度的夹角</li>
+<li>正手接球时，无名指和小指握紧球拍。</li>
+<li>准备接球时，双手举高，这样直接就可以做出接小球动作。</li>
+</ul>
+
+
+<p><em>进阶:</em></p>
+
+<ul>
+<li><p>变化：接小球的同样的动作，在接球瞬间可以变化:</p>
+
+<ol>
+<li>接对角: 球拍对着网，然后手像扭螺丝一样扭转90度。</li>
+<li>变平推: 球拍对着网，手腕转过来，变成手腕向上，然后平推
+<p></p></li>
+</ol>
+</li>
+<li><p>策略：接小球之后是要将对手变成被动方。所以在对方回球时，我方有几种策略：</p>
+
+<ol>
+<li>直接网前扑球</li>
+<li>接对角</li>
+</ol>
+</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tmux高级部分]]></title>
