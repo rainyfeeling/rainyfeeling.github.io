@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-12-17T16:26:12+08:00</updated>
+  <updated>2017-12-17T17:35:40+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -21,21 +21,33 @@
     <content type="html"><![CDATA[<h2>写博客的基本流程</h2>
 
 <p>首先运行octopress里面的<code>rake preview</code>和<code>rake watch</code>。查看log运行正常，下面的log就表示运行正常:
-```sh
-➜  octopress rake watch
-Starting to watch source with Jekyll and Compass.</p>
-
-<blockquote><blockquote><blockquote><p>Compass is watching for changes. Press Ctrl-C to Stop.</p></blockquote></blockquote></blockquote>
-
-<p>Configuration file: /home/josh/work/blogger/octopress/_config.yml
-            Source: source
-       Destination: public
-      Generating&hellip;
-                    done.
- Auto-regeneration: enabled for &lsquo;source&rsquo;
-    write public/stylesheets/screen.css
-      Regenerating: 1 file(s) changed at 2017-06-11 10:20:43 &hellip;done in 0.44646012 seconds.
-```</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>➜  octopress rake watch
+</span><span class='line'>Starting to watch <span class="nb">source </span>with Jekyll and Compass.&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;blockquote&gt;&lt;blockquote&gt;&lt;blockquote&gt;&lt;p&gt;Compass is watching <span class="k">for</span> changes. Press Ctrl-C to Stop.&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;Configuration file: /home/josh/work/blogger/octopress/_config.yml
+</span><span class='line'>            Source: <span class="nb">source</span>
+</span><span class='line'><span class="nb">       </span>Destination: public
+</span><span class='line'>      Generating<span class="p">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>                    <span class="k">done</span>.
+</span><span class='line'> Auto-regeneration: enabled <span class="k">for</span> <span class="p">&amp;</span>lsquo<span class="p">;</span><span class="nb">source</span><span class="p">&amp;</span>rsquo<span class="p">;</span>
+</span><span class='line'>    write public/stylesheets/screen.css
+</span><span class='line'>      Regenerating: <span class="m">1</span> file<span class="o">(</span>s<span class="o">)</span> changed at 2017-06-11 10:20:43 <span class="p">&amp;</span>hellip<span class="p">;</span><span class="k">done</span> in 0.44646012 seconds.
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>然后用浏览器打开<code>localhost:4000</code>，按<code>F5</code>刷新查看效果</p>
 
@@ -159,66 +171,123 @@ ruby 1.9.3p484 (2013-11-22 revision 43786) [x86_64-linux]
 <h3>步骤</h3>
 
 <p>首先下载Octopress的源码
-```
-➜  git clone git://github.com/imathis/octopress.git
-➜  cd octopress</p>
-
-<h1>列出目录下所有文件</h1>
-
-<p>➜  ls
-CHANGELOG.markdown  config.rb  config.ru  _config.yml  Gemfile  plugins  Rakefile  README.markdown
-<code>
-目录下面有Gemfile，里面列出了Octopress需要安装的gem。需要用bundle安装
-</code></p>
-
-<h1>安装bundle, 如果已经安装了就可以略过这一步</h1>
-
-<p>➜  gem install bundle</p>
-
-<h1>根据Gemfile来安装相应的依赖。</h1>
-
-<p>➜  bundle install</p>
-
-<h1>NOTE: 我遇到了有一个插件要求ruby 2.0.0，但是我的版本是1.9.3。但是重新运行了几次就成功了？！</h1>
-
-<pre><code>
-## 3. 配置Octopress
-运行rake命令安装默认的theme
-</code></pre>
-
-<h1>生成sass目录和source目录</h1>
-
-<p>➜  rake install
-<code>
-设置github pages
-</code>
-➜  rake setup_github_pages</p>
-
-<h1>需要输入你的github.io的URL, 比如我的就是<a href="https://github.com/rainyfeeling/rainyfeeling.github.io">https://github.com/rainyfeeling/rainyfeeling.github.io</a></h1>
-
-<h1>成功之后会在目录下面生成一个_deploy目录，这个文件夹就静态网站的所有内容。现在里面就一个简单字符串</h1>
-
-<pre><code>编辑`_config.yml`来更改博客的基本信息，像标题等等
-
-## 4. 写博客文章
-新建标题文章, 注意在zsh里面，所以`[`, `]`字符前面要加转义符`\`
-</code></pre>
-
-<p>rake new_post[&ldquo;Ubuntu 14.04上安装octopress&rdquo;]</p>
-
-<h1>在 <em>source/</em>posts目录下生成了一个 .markdown 文件</h1>
-
-<pre><code>用markdown编辑器修改文章，直到文章差不多完成，这时可以开始生成网站内容
-</code></pre>
-
-<h1>Generates posts and pages into the public directory</h1>
-
-<p>rake generate</p>
-
-<h1>运行一个本地server，便于调试</h1>
-
-<p>rake preview    # Watches, and mounts a webserver at
-```</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>➜  git clone git://github.com/imathis/octopress.git
+</span><span class='line'>➜  <span class="nb">cd </span>octopress&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;列出目录下所有文件&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;➜  ls
+</span><span class='line'>CHANGELOG.markdown  config.rb  config.ru  _config.yml  Gemfile  plugins  Rakefile  README.markdown
+</span><span class='line'>&lt;code&gt;
+</span><span class='line'>目录下面有Gemfile，里面列出了Octopress需要安装的gem。需要用bundle安装
+</span><span class='line'>&lt;/code&gt;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;安装bundle, 如果已经安装了就可以略过这一步&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;➜  gem install bundle&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;根据Gemfile来安装相应的依赖。&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;➜  bundle install&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;NOTE: 我遇到了有一个插件要求ruby 2.0.0，但是我的版本是1.9.3。但是重新运行了几次就成功了？！&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;
+</span><span class='line'><span class="c">## 3. 配置Octopress</span>
+</span><span class='line'>运行rake命令安装默认的theme
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;生成sass目录和source目录&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;➜  rake install
+</span><span class='line'>&lt;code&gt;
+</span><span class='line'>设置github pages
+</span><span class='line'>&lt;/code&gt;
+</span><span class='line'>➜  rake setup_github_pages&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;需要输入你的github.io的URL, 比如我的就是&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/rainyfeeling/rainyfeeling.github.io&quot;</span>&gt;https://github.com/rainyfeeling/rainyfeeling.github.io&lt;/a&gt;&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;成功之后会在目录下面生成一个_deploy目录，这个文件夹就静态网站的所有内容。现在里面就一个简单字符串&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;编辑<span class="sb">`</span>_config.yml<span class="sb">`</span>来更改博客的基本信息，像标题等等
+</span><span class='line'>
+</span><span class='line'><span class="c">## 4. 写博客文章</span>
+</span><span class='line'>新建标题文章, 注意在zsh里面，所以<span class="sb">`</span><span class="o">[</span><span class="sb">`</span>, <span class="sb">`</span><span class="o">]</span><span class="sb">`</span>字符前面要加转义符<span class="sb">`</span><span class="se">\`</span>
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;rake new_post<span class="o">[</span><span class="p">&amp;</span>ldquo<span class="p">;</span>Ubuntu 14.04上安装octopress<span class="p">&amp;</span>rdquo<span class="p">;</span><span class="o">]</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;在 &lt;em&gt;source/&lt;/em&gt;posts目录下生成了一个 .markdown 文件&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;用markdown编辑器修改文章，直到文章差不多完成，这时可以开始生成网站内容
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Generates posts and pages into the public directory&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;rake generate&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;运行一个本地server，便于调试&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;rake preview    <span class="c"># Watches, and mounts a webserver at</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>打开浏览器，在地址栏里面输入<a href="http://localhost:4000">http://localhost:4000</a> 就可以看到网站的内容了</p>
 

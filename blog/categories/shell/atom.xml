@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shell | 十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-12-17T16:26:12+08:00</updated>
+  <updated>2017-12-17T17:35:40+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -29,22 +29,34 @@
 until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done
 </code></li>
 <li>如果多行的话，不需要分隔符，直接用<code>\n</code>
-```
-
-<h1>上面的单行命令变成了多行</h1>
-
-<p>until TEST-COMMANDS
-do CONSEQUENT-COMMANDS
-done</p></li>
-</ul>
-
-
-<h1>if [] 是一条命令，then是第二条命令</h1>
-
-<p>if [ x"$STR" = &ldquo;x&rdquo; ]; then
-    echo &ldquo;STR is empty!&rdquo;
-fi
-```</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>&lt;h1&gt;上面的单行命令变成了多行&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;until TEST-COMMANDS
+</span><span class='line'>do CONSEQUENT-COMMANDS
+</span><span class='line'>done&lt;/p&gt;&lt;/li&gt;
+</span><span class='line'>&lt;/ul&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;if [] 是一条命令，then是第二条命令&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;if [ x"$STR" = &ldquo;x&rdquo; ]; then
+</span><span class='line'>    echo &ldquo;STR is empty!&rdquo;
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure></p>
 
 <h2>变量名</h2>
 
@@ -175,18 +187,22 @@ if [ ! -f $x ] &amp;&amp; [ $1 != "abc" ]; then xxx; fi # 文件不存在,并且
 
 <ul>
 <li>当执行一个脚本时，会新生成一个shell进程去执行，而新生成的进程并不会知道调用者线程里定义的变量。</li>
-<li>假如想让运行的脚本也知道当前的变量的话，就需要用<code>. xxx.sh</code>或者<code>source xxx.sh</code>。这样就不会打开新的shell进程。而是在当前进程里面执行新的脚本。
-```
-
-<h1>加了.号，表示不要新开shell进程。这样就能继承现有的变量</h1>
-
-<p>. ./my_shll.sh</p></li>
+<li>假如想让运行的脚本也知道当前的变量的话，就需要用<code>. xxx.sh</code>或者<code>source xxx.sh</code>。这样就不会打开新的shell进程。而是在当前进程里面执行新的脚本。</li>
 </ul>
 
 
-<p>source my_shell.sh
-<code>``
-* 如果一个脚本调用了</code>cd xxx`,当这个脚本退出的时候，当前目录却还是原来的目录。因为只是在哪个脚本里的当前目录变了，如果退出了，则那个脚本的线程已经退出了。</p>
+<pre><code>
+# 加了.号，表示不要新开shell进程。这样就能继承现有的变量
+
+. ./my_shll.sh
+
+source my_shell.sh
+</code></pre>
+
+<ul>
+<li>如果一个脚本调用了<code>cd xxx</code>,当这个脚本退出的时候，当前目录却还是原来的目录。因为只是在哪个脚本里的当前目录变了，如果退出了，则那个脚本的线程已经退出了。</li>
+</ul>
+
 
 <h2>文件描述符 (相当于打开了一个文件句柄)</h2>
 
@@ -259,7 +275,8 @@ exec 4&lt;&amp;-
 </ul>
 
 
-<pre><code># 去掉空格
+<pre><code>
+# 去掉空格
 $ echo "fdsfsA5 45gbmcRR" | tr -d ' '
 
 # 去掉f或者d
@@ -298,26 +315,28 @@ vi filename
 
 <h3>字符串操作</h3>
 
-<pre><code># 截取字符串的前两个 从1开始，取2个字符
+<pre><code>
+# 截取字符串的前两个 从1开始，取2个字符
 echo abcdefg | awk '{print substr($0,1,2)}'
 </code></pre>
 
 <h3>10进制，16进制转换</h3>
 
 <ul>
-<li>awk
-```
-echo 530 | awk &lsquo;{printf(&ldquo;%04x&rdquo;, $1)}&rsquo;</li>
+<li>awk</li>
 </ul>
 
 
-<p> # 将一个大数变成16进制，而且裁成两部分
- echo 530 | awk &lsquo;{printf(&ldquo;%04x&rdquo;, $1)}&rsquo; | sed &rsquo;s/^../0x&amp;,0x/'</p>
+<pre><code>
+ echo 530 | awk '{printf("%04x", $1)}'
 
-<p> # sed 匹配行首，行末位置 ^, $
+ # 将一个大数变成16进制，而且裁成两部分
+ echo 530 | awk '{printf("%04x", $1)}' | sed 's/^../0x&amp;,0x/'
+
+ # sed 匹配行首，行末位置 ^, $
  # sed 匹配字符 ^.. 匹配行首的前两个字符。
- sed &rsquo;s/^../&amp;,/&lsquo;   # 找到行首第二个字符，然后添加一个,号。其中&amp;表示匹配的部分。
-```</p>
+ sed 's/^../&amp;,/'   # 找到行首第二个字符，然后添加一个,号。其中&amp;表示匹配的部分。
+</code></pre>
 
 <ul>
 <li>bc
@@ -331,7 +350,8 @@ echo 'obase=16; 77' | bc
 
 <p><a href="http://www.cnblogs.com/killkill/archive/2010/06/23/1763785.html">http://www.cnblogs.com/killkill/archive/2010/06/23/1763785.html</a></p>
 
-<pre><code># -n 是不要加回车
+<pre><code>
+# -n 是不要加回车
 echo -n -e "\xf1\x19\x07\x2b\x3e\x24\x2c\x2c\xbe\x96\x18\x71\x1f\x91\xa8\x69" &gt; tt.bin
 md5sum tt.bin
 a8b5f2dcdccfe7c8ec18060c12820e98 *tt.bin
@@ -343,30 +363,30 @@ a8b5f2dcdccfe7c8ec18060c12820e98 *-
 
 <h3>hexdump和xxd的区别 (慎用hexdump，只用xxd)</h3>
 
-<p>通过以下例子可以知道<code>xxd</code> 和 <code>hexdump -C</code> 是一样的。
-```
-➜  whitedwarf:rsa_pub_format_test  echo -n -e &ldquo;\xf1\x19&rdquo; | xxd
-0000000: f119                                     ..</p>
+<p>通过以下例子可以知道<code>xxd</code> 和 <code>hexdump -C</code> 是一样的。</p>
 
-<h1>和xxd一样</h1>
+<pre><code>
+➜  whitedwarf:rsa_pub_format_test  echo -n -e "\xf1\x19" | xxd 
+0000000: f119                                     ..
 
-<p>➜  whitedwarf:rsa_pub_format_test  echo -n -e &ldquo;\xf1\x19&rdquo; | hexdump -C
+# 和xxd一样
+➜  whitedwarf:rsa_pub_format_test  echo -n -e "\xf1\x19" | hexdump -C
 00000000  f1 19                                             |..|
-00000002</p>
+00000002
 
-<h1>和xxd不一样，倒过来了</h1>
-
-<p>➜  whitedwarf:rsa_pub_format_test  echo -n -e &ldquo;\xf1\x19&rdquo; | hexdump
-0000000 19f1                                 <br/>
+# 和xxd不一样，倒过来了
+➜  whitedwarf:rsa_pub_format_test  echo -n -e "\xf1\x19" | hexdump 
+0000000 19f1                                   
 0000002
-```</p>
+</code></pre>
 
 <h3>xxd的用法</h3>
 
 <p><code>-r</code>: 可以将16进制数变成字符串
 <code>-i</code>: 可以生成c语言格式的字串</p>
 
-<pre><code># 将字符串转成16进制数
+<pre><code>
+# 将字符串转成16进制数
 $ echo -n "Josh what's" | xxd -i
 0x4a, 0x6f, 0x73, 0x68, 0x20, 0x77, 0x68, 0x61, 0x74, 0x27, 0x73
 
@@ -407,7 +427,8 @@ ps –ejH   # ditto
 
 <h2>grep搜索字符串</h2>
 
-<pre><code># 在所有文件里搜索QT5字串,包括子目录. 但是没有包括隐藏目录?!
+<pre><code>
+# 在所有文件里搜索QT5字串,包括子目录. 但是没有包括隐藏目录?!
 grep -r &lt;搜索文本&gt; &lt;什么文件&gt;
 grep -nR QT5 *
 grep -r "fs" *
@@ -420,7 +441,8 @@ grep --binary-files=text
 
 <h2>git grep 搜索宏定义，然后查找哪些是没有用过的</h2>
 
-<pre><code># 1. 将所有搜到的宏定义存到macros文件
+<pre><code>
+# 1. 将所有搜到的宏定义存到macros文件
 git grep -h "#define" | awk -F: '{print $2}'| sed 's/^[/ \t\n]*//g' | awk '{print $2}' | sed 's/(.*$//g'  &gt; macros
 
 # NOTES:
@@ -443,7 +465,8 @@ echo -e "$1\t: ${COUNT}"
 
 <h2>find查找文件名或目录</h2>
 
-<pre><code>find . -name "*.sh"
+<pre><code>
+find . -name "*.sh"
 
 # 查找比file.txt更新的所有文件
 find . -type f -newer file.txt -print
@@ -515,7 +538,8 @@ git mv $1 $NEW_NAME
 
 <h3>egrep 抽取字符串</h3>
 
-<pre><code># 得到所有href="xxx"的字串
+<pre><code>
+# 得到所有href="xxx"的字串
 egrep -o "href=[^&gt;]*" dl.html
 </code></pre>
 
@@ -549,7 +573,8 @@ rsync -av test support-issue --exclude "output/"
 
 <h2>for循环</h2>
 
-<pre><code># 循环一个字符串数组
+<pre><code>
+# 循环一个字符串数组
 PROJECT_LIST="linux4sam_wiki at91_sd_boot"
 for PROJECT in $PROJECT_LIST
 do
@@ -578,15 +603,20 @@ done
 
 <ul>
 <li>在空格文件夹的同级目录上建立一个shell脚本: test.sh
-```
-
-<h2>tesh.sh</h2>
-
-<h1>!/bin/bash</h1>
-
-<p><em>renamed=<code>echo $1 | sed 's/\ /_/'</code>
-mv &ldquo;$1&rdquo; $</em>renamed
-```</p></li>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>&lt;h2&gt;tesh.sh&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;!/bin/bash&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;&lt;em&gt;renamed=&lt;code&gt;echo $1 | sed 's/\ /_/'&lt;/code&gt;
+</span><span class='line'>mv &ldquo;$1&rdquo; $&lt;/em&gt;renamed</span></code></pre></td></tr></table></div></figure></p></li>
 <li>把上面的文件加上执行权限
 <code>
 chmod +x test.sh
@@ -633,35 +663,27 @@ sudo chmod 440 /etc/sudoers.d/$user
 
 <p>文件/目录一般会有三列，分别为owner(u), group(g), others(o)。在chmod里面用u, g, o来表示。</p>
 
-<p>比如要让一个目录所有人都能读的话，就可以把rx属性加给others
-```</p>
+<p>比如要让一个目录所有人都能读的话，就可以把rx属性加给others</p>
 
-<h1>-R 表示包含所有子目录</h1>
-
-<p>chmod -R o+rx xxx_path/
-```</p>
+<pre><code># -R 表示包含所有子目录
+chmod -R o+rx xxx_path/
+</code></pre>
 
 <h2>cut用法</h2>
 
-<p>grep 字符, 只把文件名打印出来:
-```</p>
+<p>grep 字符, 只把文件名打印出来:</p>
 
-<h1>cut:</h1>
+<pre><code># cut: 
+# -f 和 -d要一起用
+#  -f num :第几个字段
+#  -d:  以:为分隔符
+#  -d\  以空格为分隔符
+# uniq: 去掉同名
 
-<h1>-f 和 -d要一起用</h1>
+git grep video= | cut -d: -f 1 | uniq
 
-<h1>-f num :第几个字段</h1>
-
-<h1>-d:  以:为分隔符</h1>
-
-<h1>-d\  以空格为分隔符</h1>
-
-<h1>uniq: 去掉同名</h1>
-
-<p>git grep video= | cut -d: -f 1 | uniq</p>
-
-<p>echo &ldquo;$BOARD_DIRS&rdquo; | cut -d\ -f 1
-```</p>
+echo "$BOARD_DIRS" | cut -d\ -f 1
+</code></pre>
 
 <h2>nm 列出.so .a文件里面的所有函数</h2>
 
@@ -704,40 +726,37 @@ crontab -e
 0 5 * * * ~/work/at91/kernel/fetch_all.sh &gt;&gt; ~/work/at91/kernel/runlog.txt 2&gt;&amp;1
 </code></p>
 
-<p>fetch_all.sh的脚步内容
-```</p>
+<p>fetch_all.sh的脚步内容</p>
 
-<h1>!/bin/sh</h1>
-
-<p>TOP_DIR=&ldquo;~/work/at91/kernel&rdquo;
+<pre><code>#!/bin/sh
+TOP_DIR="~/work/at91/kernel"
 PATH=$PATH:/home/josh/bin
 cd ~/work/at91/kernel/linuxs
-echo &ldquo;start fetching at&rdquo; <code>date</code>
+echo "start fetching at" `date`
 git fetch at91
 git fetch linus
 git fetch mtd
 git fetch stable
-echo &ldquo;Done&rdquo;
-echo &ldquo;&rdquo;
-cd - > /dev/null 2>&amp;1</p>
-
-<pre><code>* 可以在/var/log/syslog里面看到cron命令是否执行
-* cron job是没有output的，所以它会将output作为邮件发出来，可以在/var/spool/mail/josh里面看到。如果没有装mail工具的话，会报错
+echo "Done"
+echo ""
+cd - &gt; /dev/null 2&gt;&amp;1
 </code></pre>
 
-<p>(CRON) info (No MTA installed, discarding output
-<code>
-这样的话，可以按照postfix
-</code>
-sudo apt-get install postfix
-```</p>
-
 <ul>
-<li>启动cron服务的命令
+<li>可以在/var/log/syslog里面看到cron命令是否执行</li>
+<li><p>cron job是没有output的，所以它会将output作为邮件发出来，可以在/var/spool/mail/josh里面看到。如果没有装mail工具的话，会报错
+<code>
+(CRON) info (No MTA installed, discarding output
+</code>
+这样的话，可以按照postfix
+<code>
+sudo apt-get install postfix
+</code></p></li>
+<li><p>启动cron服务的命令
 <code>
 // @ubuntu 14.04
 sudo service cron restart
-</code></li>
+</code></p></li>
 </ul>
 
 

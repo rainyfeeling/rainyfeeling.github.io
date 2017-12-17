@@ -304,10 +304,15 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 加了.号，表示不要新开shell进程。这样就能继承现有的变量
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 加了.号，表示不要新开shell进程。这样就能继承现有的变量
+</span><span class='line'>
 </span><span class='line'>. ./my_shll.sh
 </span><span class='line'>
-</span><span class='line'>source my_shell.sh</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>source my_shell.sh
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -425,7 +430,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 去掉空格
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 去掉空格
 </span><span class='line'>$ echo "fdsfsA5 45gbmcRR" | tr -d ' '
 </span><span class='line'>
 </span><span class='line'># 去掉f或者d
@@ -467,7 +474,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 截取字符串的前两个 从1开始，取2个字符
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 截取字符串的前两个 从1开始，取2个字符
 </span><span class='line'>echo abcdefg | awk '{print substr($0,1,2)}'</span></code></pre></td></tr></table></div></figure>
 
 
@@ -486,7 +495,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> echo 530 | awk '{printf("%04x", $1)}'
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'> echo 530 | awk '{printf("%04x", $1)}'
 </span><span class='line'> 
 </span><span class='line'> # 将一个大数变成16进制，而且裁成两部分
 </span><span class='line'> echo 530 | awk '{printf("%04x", $1)}' | sed 's/^../0x&,0x/'
@@ -517,7 +528,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># -n 是不要加回车
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># -n 是不要加回车
 </span><span class='line'>echo -n -e "\xf1\x19\x07\x2b\x3e\x24\x2c\x2c\xbe\x96\x18\x71\x1f\x91\xa8\x69" &gt; tt.bin
 </span><span class='line'>md5sum tt.bin
 </span><span class='line'>a8b5f2dcdccfe7c8ec18060c12820e98 *tt.bin
@@ -544,7 +557,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>➜  whitedwarf:rsa_pub_format_test  echo -n -e "\xf1\x19" | xxd 
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>➜  whitedwarf:rsa_pub_format_test  echo -n -e "\xf1\x19" | xxd 
 </span><span class='line'>0000000: f119                                     ..
 </span><span class='line'>
 </span><span class='line'># 和xxd一样
@@ -570,7 +585,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 将字符串转成16进制数
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 将字符串转成16进制数
 </span><span class='line'>$ echo -n "Josh what's" | xxd -i
 </span><span class='line'>0x4a, 0x6f, 0x73, 0x68, 0x20, 0x77, 0x68, 0x61, 0x74, 0x27, 0x73
 </span><span class='line'>
@@ -623,7 +640,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 在所有文件里搜索QT5字串,包括子目录. 但是没有包括隐藏目录?!
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 在所有文件里搜索QT5字串,包括子目录. 但是没有包括隐藏目录?!
 </span><span class='line'>grep -r &lt;搜索文本&gt; &lt;什么文件&gt;
 </span><span class='line'>grep -nR QT5 *
 </span><span class='line'>grep -r "fs" *
@@ -655,7 +674,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 1. 将所有搜到的宏定义存到macros文件
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 1. 将所有搜到的宏定义存到macros文件
 </span><span class='line'>git grep -h "#define" | awk -F: '{print $2}'| sed 's/^[/ \t\n]*//g' | awk '{print $2}' | sed 's/(.*$//g'  &gt; macros
 </span><span class='line'>
 </span><span class='line'># NOTES:
@@ -685,7 +706,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find . -name "*.sh"
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>find . -name "*.sh"
 </span><span class='line'>
 </span><span class='line'># 查找比file.txt更新的所有文件
 </span><span class='line'>find . -type f -newer file.txt -print
@@ -794,7 +817,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 得到所有href="xxx"的字串
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 得到所有href="xxx"的字串
 </span><span class='line'>egrep -o "href=[^&gt;]*" dl.html</span></code></pre></td></tr></table></div></figure>
 
 
@@ -849,7 +874,9 @@ until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done 如果多行的话，不需要
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 循环一个字符串数组
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 循环一个字符串数组
 </span><span class='line'>PROJECT_LIST="linux4sam_wiki at91_sd_boot"
 </span><span class='line'>for PROJECT in $PROJECT_LIST
 </span><span class='line'>do
@@ -1262,6 +1289,12 @@ ssh -vvv</p>
 
 <time class='entry-date' datetime='2017-12-17T12:38:35+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:38 pm</span></time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/shell/'>shell</a>
+  
+</span>
 
 
     </p>
