@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shell | 十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-12-17T17:35:40+08:00</updated>
+  <updated>2017-12-24T15:31:13+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -24,43 +24,35 @@
 
 <ul>
 <li>如果一行只有一条命令，不需要分隔符</li>
-<li>如果一行有多条命令，则每条命令后面需要加<code>;</code>
-<code>
+<li>如果一行有多条命令，则每条命令后面需要加<code>;</code></li>
+</ul>
+
+
+<pre><code>
 until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done
-</code></li>
-<li>如果多行的话，不需要分隔符，直接用<code>\n</code>
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>&lt;h1&gt;上面的单行命令变成了多行&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;until TEST-COMMANDS
-</span><span class='line'>do CONSEQUENT-COMMANDS
-</span><span class='line'>done&lt;/p&gt;&lt;/li&gt;
-</span><span class='line'>&lt;/ul&gt;
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;if [] 是一条命令，then是第二条命令&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;if [ x"$STR" = &ldquo;x&rdquo; ]; then
-</span><span class='line'>    echo &ldquo;STR is empty!&rdquo;
-</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure></p>
+</code></pre>
+
+<ul>
+<li>如果多行的话，不需要分隔符，直接用<code>\n</code></li>
+</ul>
+
+
+<pre><code>
+# 上面的单行命令变成了多行
+until TEST-COMMANDS
+do CONSEQUENT-COMMANDS
+done
+
+# if [] 是一条命令，then是第二条命令
+if [ x"$STR" = "x" ]; then
+    echo "STR is empty!"
+fi
+</code></pre>
 
 <h2>变量名</h2>
 
-<pre><code>MY_VAL=josh
+<pre><code>
+MY_VAL=josh
 echo $MY_VAL            # 显示单独的变量,变量前加$
 echo "var is: $MY_VAL"  # 显示变量和文本，要用双引号""
 echo "${MY_VAL}_file"   # 显示变量和文本连接在一起，要加大括号{}
@@ -75,7 +67,8 @@ VAL="$#"; echo ${!VAL}  # 显示最后一个变量的值
 
 <h2>eval表示纯粹的字符串替换，然后执行</h2>
 
-<pre><code>VAL="echo \$$#"
+<pre><code>
+VAL="echo \$$#"
 eval $VAL
 # 先将$VAL表示出来, 假设$#等于4，$VAL即为"echo \$4"
 # 然后执行，即显示最后一个变量的值
@@ -91,13 +84,18 @@ LAST=`eval $VAL`        # LAST等于执行后的结果,即最后一个变量的�
 
 <ul>
 <li><code>$1</code>, <code>$2</code>&hellip; <code>$9</code>, 表示参数，只能显示1~9个</li>
-<li> <code>shift</code>命令可以让参数移一位。原来的第9个现在就是第10个参数了
-<code>
-shift
-echo $9  # 第10个参数
-</code></li>
+<li> <code>shift</code>命令可以让参数移一位。原来的第9个现在就是第10个参数了</li>
 </ul>
 </li>
+</ul>
+
+
+<pre><code>
+shift
+echo $9  # 第10个参数
+</code></pre>
+
+<ul>
 <li><code>$#</code> 表示参数的个数，如果为0，表示没有参数</li>
 <li><code>$?</code> 表示上一条命令的返回值， 0表示成功，否则表示失败</li>
 <li><code>$*</code> 表示一个字串，这个字串包含所有参数</li>
@@ -171,7 +169,8 @@ echo $9  # 第10个参数
 
 <h3>举例</h3>
 
-<pre><code>if [ $x -eq 2 ];   then xxx; fi # 数字比较
+<pre><code>
+if [ $x -eq 2 ];   then xxx; fi # 数字比较
 if [ $x -ne "2" ]; then xxx; fi # 数字比较
 if [ $x != "2" ];  then xxx; fi # 字串比较
 if [ $x = "2" ];   then xxx; fi # 字串比较
@@ -193,7 +192,6 @@ if [ ! -f $x ] &amp;&amp; [ $1 != "abc" ]; then xxx; fi # 文件不存在,并且
 
 <pre><code>
 # 加了.号，表示不要新开shell进程。这样就能继承现有的变量
-
 . ./my_shll.sh
 
 source my_shell.sh
@@ -226,8 +224,13 @@ source my_shell.sh
 
 <ul>
 <li>exec可以节省些资源</li>
-<li>exec可以用来打开文件描述符
-<code>
+<li>exec可以用来打开文件描述符</li>
+</ul>
+</li>
+</ul>
+
+
+<pre><code>
 cd /dev/fd
 exec 3&lt; ~/temp.txt        # 新建一个file descriptor 3 (/dev/fd/3), 里面的内容是从~/temp.txt里读过来的。
 cat 3                     # file descriptor 3里面的内容跟temp.txt是一样的。  
@@ -237,22 +240,20 @@ cat thatfile              # 可以看到上面语句写的字符串也已经写�
 exec 8&lt;&gt; tother           # open "tother" for reading and writing on fd 8
 exec 3&lt;&amp;-                 # close the read file descriptor 3
 exec 4&lt;&amp;-
-</code></li>
-</ul>
-</li>
-</ul>
-
+</code></pre>
 
 <h2>vim</h2>
 
 <h3>vim里面更改只读文件</h3>
 
-<pre><code>:w ! sudo tee %
+<pre><code>
+:w ! sudo tee %
 </code></pre>
 
 <h3>vim显示16进制</h3>
 
-<pre><code># vim -b 打开文件不会加回车
+<pre><code>
+# vim -b 打开文件不会加回车
 
 # 显示16进制
 :% ! xxd
@@ -263,7 +264,8 @@ exec 4&lt;&amp;-
 
 <h2>dd 用法</h2>
 
-<pre><code>dd if=/dev/zero ibs=1k count=2 | tr "\000" "\377" &gt; AllFF.bin
+<pre><code>
+dd if=/dev/zero ibs=1k count=2 | tr "\000" "\377" &gt; AllFF.bin
 </code></pre>
 
 <h2>tr用法</h2>
@@ -339,12 +341,13 @@ echo abcdefg | awk '{print substr($0,1,2)}'
 </code></pre>
 
 <ul>
-<li>bc
-<code>
-echo 'obase=16; 77' | bc
-</code></li>
+<li>bc</li>
 </ul>
 
+
+<pre><code>
+echo 'obase=16; 77' | bc 
+</code></pre>
 
 <h3>md5 16进制数</h3>
 
@@ -416,13 +419,15 @@ $ echo -n "Josh what's" | xxd -i | tr -d ' '
 
 <h2>Display process information:</h2>
 
-<pre><code>ps axjf # display prcess tree
+<pre><code>
+ps axjf # display prcess tree
 ps –ejH   # ditto
 </code></pre>
 
 <h2>kill杀死进程</h2>
 
-<pre><code>kill -9 &lt;pid&gt;
+<pre><code>
+kill -9 &lt;pid&gt;
 </code></pre>
 
 <h2>grep搜索字符串</h2>
@@ -477,7 +482,8 @@ find . -maxdepth 1 -type d -name '*sama5d2_xplained*'
 
 <h2>批量更改名字(sed)</h2>
 
-<pre><code>for files in `find . -name "CSRMesh*" -type d`;do;git mv $files `echo "$files" | sed 's/CSRMesh/CSRmesh/'`;done
+<pre><code>
+for files in `find . -name "CSRMesh*" -type d`;do;git mv $files `echo "$files" | sed 's/CSRMesh/CSRmesh/'`;done
 
 
 #！/bin/bash
@@ -493,12 +499,14 @@ done
 
 <h3>xargs: 在所有.h文件里搜索"fs"</h3>
 
-<pre><code>find . -name "*.h" | xargs grep "fs" 
+<pre><code>
+find . -name "*.h" | xargs grep "fs" 
 </code></pre>
 
 <h3>xargs: 将xargs里面的数组一个一个的取出来执行</h3>
 
-<pre><code>find . -name "*.h" | xargs -I {} cat {}
+<pre><code>
+find . -name "*.h" | xargs -I {} cat {}
 
 find . -name "*.h" | xargs -n 1 echo
 
@@ -511,23 +519,27 @@ git br | xargs -I {} git branch -d {}
 
 <h3>xargs: 将xargs里面的数组一个一个的取出来做复杂运算</h3>
 
-<pre><code>find . -name "Config.in*" | xargs -n 1 ./change.sh
+<pre><code>
+find . -name "Config.in*" | xargs -n 1 ./change.sh
 </code></pre>
 
 <h3>另外一种查找文件，然后执行的方法</h3>
 
-<pre><code>find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+<pre><code>
+find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 </code></pre>
 
 <h3>获得git里面所有modified文件列表</h3>
 
-<pre><code>git status -s | grep M | awk '{print $2}' 
+<pre><code>
+git status -s | grep M | awk '{print $2}' 
 
 # 对这些文件做 dos2unix
 git status -s | grep M | awk '{print $2}' | xargs -n1 dos2unix
 </code></pre>
 
-<pre><code># change.sh: run git mv to rename the files
+<pre><code>
+# change.sh: run git mv to rename the files
 #!/bin/bash
 
 NEW_NAME=`echo $1 | sed s/Config.in/Kconfig/`
@@ -545,13 +557,15 @@ egrep -o "href=[^&gt;]*" dl.html
 
 <h2>tail 显示dmesg</h2>
 
-<pre><code>tail -f /var/log/syslog
+<pre><code>
+tail -f /var/log/syslog
 tail -f /var/log/{messages,kernel,dmesg,syslog}
 </code></pre>
 
 <h2>{} 用来生成组合</h2>
 
-<pre><code>echo {a,b}{a,b}
+<pre><code>
+echo {a,b}{a,b}
 aa ab ba bb
 
 cp file{,.bak}
@@ -560,13 +574,15 @@ cp file file.bak
 
 <h2>random随机数打印</h2>
 
-<pre><code>printf "%04x\n" $RANDOM
+<pre><code>
+printf "%04x\n" $RANDOM
 echo "obase=16;$RANDOM" | bc
 </code></pre>
 
 <h2>rsync拷贝文件,除了某个目录</h2>
 
-<pre><code># -a: archive mode, 包括-r etc.
+<pre><code>
+# -a: archive mode, 包括-r etc.
 # -v: verbose
 rsync -av test support-issue --exclude "output/"
 </code></pre>
@@ -587,7 +603,8 @@ for num in `seq 0 6`;do;echo file${num};done
 
 <h3>批量文件copy/改名</h3>
 
-<pre><code>for file in `ls sama5d3*revc_pda7*dts`; do; cp $file `echo $file | sed 's/pda7/pda4/'`; done
+<pre><code>
+for file in `ls sama5d3*revc_pda7*dts`; do; cp $file `echo $file | sed 's/pda7/pda4/'`; done
 
 #！/bin/bash
 for files in `find . -name "u-boot.bin"`
@@ -602,45 +619,51 @@ done
 <h4>将空格文件夹改名字</h4>
 
 <ul>
-<li>在空格文件夹的同级目录上建立一个shell脚本: test.sh
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>&lt;h2&gt;tesh.sh&lt;/h2&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;!/bin/bash&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;&lt;em&gt;renamed=&lt;code&gt;echo $1 | sed 's/\ /_/'&lt;/code&gt;
-</span><span class='line'>mv &ldquo;$1&rdquo; $&lt;/em&gt;renamed</span></code></pre></td></tr></table></div></figure></p></li>
-<li>把上面的文件加上执行权限
-<code>
-chmod +x test.sh
-</code></li>
-<li>然后执行命令
-<code>
-find . -maxdepth 1 -type d -name '* *'|  xargs -n 1 -I {} ./tesh.sh {}
-</code></li>
+<li>在空格文件夹的同级目录上建立一个shell脚本: test.sh</li>
 </ul>
 
 
+<pre><code>
+## tesh.sh
+#!/bin/bash
+_renamed=`echo $1 | sed 's/\ /_/'`
+mv "$1" $_renamed
+</code></pre>
+
+<ul>
+<li>把上面的文件加上执行权限</li>
+</ul>
+
+
+<pre><code>
+chmod +x test.sh
+</code></pre>
+
+<ul>
+<li>然后执行命令</li>
+</ul>
+
+
+<pre><code>
+find . -maxdepth 1 -type d -name '* *'|  xargs -n 1 -I {} ./tesh.sh {}
+</code></pre>
+
 <h2>!! 上一条命令</h2>
 
-<pre><code>sudo !!
+<pre><code>
+sudo !!
 </code></pre>
 
 <h2>cd - 上一个目录</h2>
 
-<pre><code>cd -
+<pre><code>
+cd -
 </code></pre>
 
 <h2>ssh</h2>
 
-<pre><code># 连上melon并执行一条命令
+<pre><code>
+# 连上melon并执行一条命令
 ssh melon cat ~/work/env.sh
 </code></pre>
 
@@ -651,7 +674,8 @@ ssh -vvv</p>
 
 <h2>sudoer with no password</h2>
 
-<pre><code>user=josh
+<pre><code>
+user=josh
 sudo adduser $user sudo
 sudo adduser $user dialout
 
@@ -665,7 +689,8 @@ sudo chmod 440 /etc/sudoers.d/$user
 
 <p>比如要让一个目录所有人都能读的话，就可以把rx属性加给others</p>
 
-<pre><code># -R 表示包含所有子目录
+<pre><code>
+# -R 表示包含所有子目录
 chmod -R o+rx xxx_path/
 </code></pre>
 
@@ -673,7 +698,8 @@ chmod -R o+rx xxx_path/
 
 <p>grep 字符, 只把文件名打印出来:</p>
 
-<pre><code># cut: 
+<pre><code>
+# cut: 
 # -f 和 -d要一起用
 #  -f num :第几个字段
 #  -d:  以:为分隔符
@@ -689,7 +715,8 @@ echo "$BOARD_DIRS" | cut -d\ -f 1
 
 <h2>dpkg查找pakage安装的文件</h2>
 
-<pre><code># dpkg查找pakage安装的文件
+<pre><code>
+# dpkg查找pakage安装的文件
 dpkg -L &lt;包名&gt;
 
 # dpkg通过文件查找对应得安装包
@@ -700,7 +727,8 @@ dpkg -S &lt;文件path&gt;
 
 <p><a href="http://www.cyberciti.biz/faq/linux-redirect-error-output-to-file/">http://www.cyberciti.biz/faq/linux-redirect-error-output-to-file/</a></p>
 
-<pre><code>stdin (0)
+<pre><code>
+stdin (0)
 stdout (1)
 stderr (2)
 
@@ -713,7 +741,8 @@ command1 -arg &gt; everything.txt 2&gt;&amp;1
 
 <h2>crontab命令</h2>
 
-<pre><code>crontab -l
+<pre><code>
+crontab -l
 crontab -e
 # 分 时 日 月 周
   10 5  *  *  0 /home/fred/foo.ksh  # 每周日5点10分
@@ -721,14 +750,16 @@ crontab -e
   [1-10]/3 23 1  8  *   xxx.sh      # 8月1日, 23点的1, 4, 7, 10分执行
 </code></pre>
 
-<p>下面设置一条命令，每天早上5点会fetch git repo
-<code>
+<p>下面设置一条命令，每天早上5点会fetch git repo</p>
+
+<pre><code>
 0 5 * * * ~/work/at91/kernel/fetch_all.sh &gt;&gt; ~/work/at91/kernel/runlog.txt 2&gt;&amp;1
-</code></p>
+</code></pre>
 
 <p>fetch_all.sh的脚步内容</p>
 
-<pre><code>#!/bin/sh
+<pre><code>
+#!/bin/sh
 TOP_DIR="~/work/at91/kernel"
 PATH=$PATH:/home/josh/bin
 cd ~/work/at91/kernel/linuxs
@@ -744,25 +775,34 @@ cd - &gt; /dev/null 2&gt;&amp;1
 
 <ul>
 <li>可以在/var/log/syslog里面看到cron命令是否执行</li>
-<li><p>cron job是没有output的，所以它会将output作为邮件发出来，可以在/var/spool/mail/josh里面看到。如果没有装mail工具的话，会报错
-<code>
-(CRON) info (No MTA installed, discarding output
-</code>
-这样的话，可以按照postfix
-<code>
-sudo apt-get install postfix
-</code></p></li>
-<li><p>启动cron服务的命令
-<code>
-// @ubuntu 14.04
-sudo service cron restart
-</code></p></li>
+<li>cron job是没有output的，所以它会将output作为邮件发出来，可以在/var/spool/mail/josh里面看到。如果没有装mail工具的话，会报错</li>
 </ul>
 
 
+<pre><code>
+(CRON) info (No MTA installed, discarding output
+</code></pre>
+
+<p>这样的话，可以按照postfix</p>
+
+<pre><code>
+sudo apt-get install postfix
+</code></pre>
+
+<ul>
+<li>启动cron服务的命令</li>
+</ul>
+
+
+<pre><code>
+// @ubuntu 14.04
+sudo service cron restart
+</code></pre>
+
 <h2>日期和时间戳转换函数</h2>
 
-<pre><code>➜  whitedwarf:zigbee-3.0 git:(develop) ✗ date
+<pre><code>
+➜  whitedwarf:zigbee-3.0 git:(develop) ✗ date
 2017年 01月 10日 星期二 15:35:25 CST
 ➜  whitedwarf:zigbee-3.0 git:(develop) ✗ date +%s
 1484033731
@@ -786,7 +826,8 @@ sudo service cron restart
 
 <h2>日期格式</h2>
 
-<pre><code>$ date "+%Y/%m/%d %H:%M:%S"
+<pre><code>
+$ date "+%Y/%m/%d %H:%M:%S"
 2017/07/11 12:38:47
 
 $ date -u "+%Y/%m/%d %H:%M:%S UTC"
@@ -799,7 +840,8 @@ $ date -u "+%Y/%m/%d %H:%M:%S UTC"
 
 <h2>源文件代码行数的计算</h2>
 
-<pre><code>cloc --no3 --by-file-by-lang
+<pre><code>
+cloc --no3 --by-file-by-lang
 </code></pre>
 
 <h2>正则表达式</h2>
@@ -811,7 +853,8 @@ $ date -u "+%Y/%m/%d %H:%M:%S UTC"
 </ul>
 
 
-<pre><code>[ ] \ ^ $ . | ? * + ( )
+<pre><code>
+[ ] \ ^ $ . | ? * + ( )
 </code></pre>
 
 <ul>

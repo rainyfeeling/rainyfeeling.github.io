@@ -4,7 +4,7 @@
   <title><![CDATA[十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2017-12-17T17:35:40+08:00</updated>
+  <updated>2017-12-24T15:31:13+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -29,7 +29,10 @@
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>until TEST-COMMANDS; do CONSEQUENT-COMMANDS; done
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -46,7 +49,9 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 上面的单行命令变成了多行
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 上面的单行命令变成了多行
 </span><span class='line'>until TEST-COMMANDS
 </span><span class='line'>do CONSEQUENT-COMMANDS
 </span><span class='line'>done
@@ -54,7 +59,8 @@
 </span><span class='line'># if [] 是一条命令，then是第二条命令
 </span><span class='line'>if [ x"$STR" = "x" ]; then
 </span><span class='line'>  echo "STR is empty!"
-</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>fi
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>变量名</h2>
@@ -67,14 +73,17 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>MY_VAL=josh
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>MY_VAL=josh
 </span><span class='line'>echo $MY_VAL            # 显示单独的变量,变量前加$
 </span><span class='line'>echo "var is: $MY_VAL"  # 显示变量和文本，要用双引号""
 </span><span class='line'>echo "${MY_VAL}_file"   # 显示变量和文本连接在一起，要加大括号{}
 </span><span class='line'>
 </span><span class='line'>echo ${!MY_VAL}         # 如果MY_VAL的值是josh,则显示$josh的内容
 </span><span class='line'>
-</span><span class='line'>VAL="$#"; echo ${!VAL}  # 显示最后一个变量的值</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>VAL="$#"; echo ${!VAL}  # 显示最后一个变量的值
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -91,13 +100,16 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>VAL="echo \$$#"
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>VAL="echo \$$#"
 </span><span class='line'>eval $VAL
 </span><span class='line'># 先将$VAL表示出来, 假设$#等于4，$VAL即为"echo \$4"
 </span><span class='line'># 然后执行，即显示最后一个变量的值
 </span><span class='line'>
 </span><span class='line'>VAL="echo \$$#"
-</span><span class='line'>LAST=`eval $VAL`      # LAST等于执行后的结果,即最后一个变量的值</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>LAST=`eval $VAL`      # LAST等于执行后的结果,即最后一个变量的值
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>shell内部变量</h2>
@@ -115,8 +127,11 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>shift
-</span><span class='line'>echo $9  # 第10个参数</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>shift
+</span><span class='line'>echo $9  # 第10个参数
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -203,7 +218,9 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if [ $x -eq 2 ];   then xxx; fi # 数字比较
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>if [ $x -eq 2 ];   then xxx; fi # 数字比较
 </span><span class='line'>if [ $x -ne "2" ]; then xxx; fi # 数字比较
 </span><span class='line'>if [ $x != "2" ];  then xxx; fi # 字串比较
 </span><span class='line'>if [ $x = "2" ];   then xxx; fi # 字串比较
@@ -212,7 +229,8 @@
 </span><span class='line'>if [ $? = 0 ];     then xxx; fi # 上条命令执行成功就 
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'>if [ ! -f $x ] && [ $1 != "abc" ]; then xxx; fi # 文件不存在,并且$1不等于abc</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>if [ ! -f $x ] && [ $1 != "abc" ]; then xxx; fi # 文件不存在,并且$1不等于abc
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>shell变量作用域</h2>
@@ -228,10 +246,8 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-<span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>
 </span><span class='line'># 加了.号，表示不要新开shell进程。这样就能继承现有的变量
-</span><span class='line'>
 </span><span class='line'>. ./my_shll.sh
 </span><span class='line'>
 </span><span class='line'>source my_shell.sh
@@ -280,7 +296,9 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd /dev/fd
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>cd /dev/fd
 </span><span class='line'>exec 3&lt; ~/temp.txt        # 新建一个file descriptor 3 (/dev/fd/3), 里面的内容是从~/temp.txt里读过来的。
 </span><span class='line'>cat 3                     # file descriptor 3里面的内容跟temp.txt是一样的。  
 </span><span class='line'>exec 4&gt; thatfile          # 新建file descriptor 4，然后把4的内容写到thatfile。因为4现在是空的，所以thatfile也变成空文件了。
@@ -288,7 +306,8 @@
 </span><span class='line'>cat thatfile              # 可以看到上面语句写的字符串也已经写到了thatfile
 </span><span class='line'>exec 8&lt;&gt; tother           # open "tother" for reading and writing on fd 8
 </span><span class='line'>exec 3&lt;&-                 # close the read file descriptor 3
-</span><span class='line'>exec 4&lt;&-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>exec 4&lt;&-
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>vim</h2>
@@ -296,7 +315,10 @@
 <h3>vim里面更改只读文件</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>:w ! sudo tee %</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>:w ! sudo tee %
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>vim显示16进制</h3>
@@ -308,19 +330,25 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># vim -b 打开文件不会加回车
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># vim -b 打开文件不会加回车
 </span><span class='line'>
 </span><span class='line'># 显示16进制
 </span><span class='line'>:% ! xxd
 </span><span class='line'>
 </span><span class='line'># 从16进制返回
-</span><span class='line'>:% ! xxd -r</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>:% ! xxd -r
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>dd 用法</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>dd if=/dev/zero ibs=1k count=2 | tr "\000" "\377" &gt; AllFF.bin</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>dd if=/dev/zero ibs=1k count=2 | tr "\000" "\377" &gt; AllFF.bin
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>tr用法</h2>
@@ -400,7 +428,8 @@
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>
 </span><span class='line'># 截取字符串的前两个 从1开始，取2个字符
-</span><span class='line'>echo abcdefg | awk '{print substr($0,1,2)}'</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>echo abcdefg | awk '{print substr($0,1,2)}'
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>10进制，16进制转换</h3>
@@ -427,7 +456,8 @@
 </span><span class='line'> 
 </span><span class='line'> # sed 匹配行首，行末位置 ^, $
 </span><span class='line'> # sed 匹配字符 ^.. 匹配行首的前两个字符。
-</span><span class='line'> sed 's/^../&,/'   # 找到行首第二个字符，然后添加一个,号。其中&表示匹配的部分。</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'> sed 's/^../&,/'   # 找到行首第二个字符，然后添加一个,号。其中&表示匹配的部分。
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -436,7 +466,10 @@
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'obase=16; 77' | bc </span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>echo 'obase=16; 77' | bc 
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>md5 16进制数</h3>
@@ -493,7 +526,8 @@
 </span><span class='line'># 和xxd不一样，倒过来了
 </span><span class='line'>➜  whitedwarf:rsa_pub_format_test  echo -n -e "\xf1\x19" | hexdump 
 </span><span class='line'>0000000 19f1                                   
-</span><span class='line'>0000002</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>0000002
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>xxd的用法</h3>
@@ -516,7 +550,8 @@
 </span><span class='line'>
 </span><span class='line'># 再通过tr去掉空格
 </span><span class='line'>$ echo -n "Josh what's" | xxd -i | tr -d ' '
-</span><span class='line'>0x4a,0x6f,0x73,0x68,0x20,0x77,0x68,0x61,0x74,0x27,0x73</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>0x4a,0x6f,0x73,0x68,0x20,0x77,0x68,0x61,0x74,0x27,0x73
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>用quilt来生成patch, 这个可以用来往一些patch系统(比如Buildroot)里面加东西</h2>
@@ -542,14 +577,20 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ps axjf  # display prcess tree
-</span><span class='line'>ps –ejH # ditto</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>ps axjf   # display prcess tree
+</span><span class='line'>ps –ejH # ditto
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>kill杀死进程</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>kill -9 &lt;pid&gt;</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>kill -9 &lt;pid&gt;
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>grep搜索字符串</h2>
@@ -573,7 +614,8 @@
 </span><span class='line'>grep -v -- &lt;不需要包括的字符&gt;
 </span><span class='line'>
 </span><span class='line'>#如果grep认为文件不是文本文件，可以指定类型
-</span><span class='line'>grep --binary-files=text</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>grep --binary-files=text
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>git grep 搜索宏定义，然后查找哪些是没有用过的</h2>
@@ -617,7 +659,8 @@
 </span><span class='line'>COUNT=`git grep $1 | wc -l`
 </span><span class='line'>echo -e "$1\t: ${COUNT}"
 </span><span class='line'>
-</span><span class='line'># 3. grep -w 1 macro_usage.txt &gt; macro_not_used</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'># 3. grep -w 1 macro_usage.txt &gt; macro_not_used
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>find查找文件名或目录</h2>
@@ -637,7 +680,8 @@
 </span><span class='line'>find . -type f -newer file.txt -print
 </span><span class='line'>
 </span><span class='line'># 在当前目录下查找名字为sama5d2_xplained的目录,不包括子目录
-</span><span class='line'>find . -maxdepth 1 -type d -name '*sama5d2_xplained*'</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>find . -maxdepth 1 -type d -name '*sama5d2_xplained*'
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>批量更改名字(sed)</h2>
@@ -652,7 +696,9 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for files in `find . -name "CSRMesh*" -type d`;do;git mv $files `echo "$files" | sed 's/CSRMesh/CSRmesh/'`;done
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>for files in `find . -name "CSRMesh*" -type d`;do;git mv $files `echo "$files" | sed 's/CSRMesh/CSRmesh/'`;done
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'>#！/bin/bash
@@ -661,7 +707,8 @@
 </span><span class='line'>        # echo $files
 </span><span class='line'>        # echo "$files" | sed 's/boot/boot-sd/'
 </span><span class='line'>        mv $files `echo "$files" | sed 's/boot/boot-sd/'`
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>done
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>xargs</h2>
@@ -669,7 +716,10 @@
 <h3>xargs: 在所有.h文件里搜索"fs"</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find . -name "*.h" | xargs grep "fs" </span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>find . -name "*.h" | xargs grep "fs" 
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>xargs: 将xargs里面的数组一个一个的取出来执行</h3>
@@ -683,7 +733,9 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find . -name "*.h" | xargs -I {} cat {}
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>find . -name "*.h" | xargs -I {} cat {}
 </span><span class='line'>
 </span><span class='line'>find . -name "*.h" | xargs -n 1 echo
 </span><span class='line'>
@@ -691,19 +743,26 @@
 </span><span class='line'>find . -name "switcher.bin" | xargs -n 1 -I {} ./test.sh {}
 </span><span class='line'>
 </span><span class='line'># 一次删除所有branch
-</span><span class='line'>git br | xargs -I {} git branch -d {}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>git br | xargs -I {} git branch -d {}
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>xargs: 将xargs里面的数组一个一个的取出来做复杂运算</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find . -name "Config.in*" | xargs -n 1 ./change.sh</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>find . -name "Config.in*" | xargs -n 1 ./change.sh
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>另外一种查找文件，然后执行的方法</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find . -name install.sh | while read installer ; do sh -c "${installer}" ; done</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>获得git里面所有modified文件列表</h3>
@@ -712,10 +771,13 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git status -s | grep M | awk '{print $2}' 
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>git status -s | grep M | awk '{print $2}' 
 </span><span class='line'>
 </span><span class='line'># 对这些文件做 dos2unix
-</span><span class='line'>git status -s | grep M | awk '{print $2}' | xargs -n1 dos2unix</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>git status -s | grep M | awk '{print $2}' | xargs -n1 dos2unix
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -727,13 +789,16 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># change.sh: run git mv to rename the files
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># change.sh: run git mv to rename the files
 </span><span class='line'>#!/bin/bash
 </span><span class='line'>
 </span><span class='line'>NEW_NAME=`echo $1 | sed s/Config.in/Kconfig/`
 </span><span class='line'>#echo $NEW_NAME
 </span><span class='line'>
-</span><span class='line'>git mv $1 $NEW_NAME</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>git mv $1 $NEW_NAME
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>egrep 抽取字符串</h3>
@@ -743,15 +808,19 @@
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>
 </span><span class='line'># 得到所有href="xxx"的字串
-</span><span class='line'>egrep -o "href=[^&gt;]*" dl.html</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>egrep -o "href=[^&gt;]*" dl.html
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>tail 显示dmesg</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tail -f /var/log/syslog
-</span><span class='line'>tail -f /var/log/{messages,kernel,dmesg,syslog}</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>tail -f /var/log/syslog
+</span><span class='line'>tail -f /var/log/{messages,kernel,dmesg,syslog}
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>{} 用来生成组合</h2>
@@ -761,19 +830,25 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>echo {a,b}{a,b}
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>echo {a,b}{a,b}
 </span><span class='line'>aa ab ba bb
 </span><span class='line'>
 </span><span class='line'>cp file{,.bak}
-</span><span class='line'>cp file file.bak</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>cp file file.bak
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>random随机数打印</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>printf "%04x\n" $RANDOM
-</span><span class='line'>echo "obase=16;$RANDOM" | bc</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>printf "%04x\n" $RANDOM
+</span><span class='line'>echo "obase=16;$RANDOM" | bc
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>rsync拷贝文件,除了某个目录</h2>
@@ -781,9 +856,12 @@
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># -a: archive mode, 包括-r etc.
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># -a: archive mode, 包括-r etc.
 </span><span class='line'># -v: verbose
-</span><span class='line'>rsync -av test support-issue --exclude "output/"</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>rsync -av test support-issue --exclude "output/"
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>for循环</h2>
@@ -807,7 +885,8 @@
 </span><span class='line'>done
 </span><span class='line'>
 </span><span class='line'># 数字循环
-</span><span class='line'>for num in `seq 0 6`;do;echo file${num};done</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>for num in `seq 0 6`;do;echo file${num};done
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>批量文件copy/改名</h3>
@@ -822,7 +901,9 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for file in `ls sama5d3*revc_pda7*dts`; do; cp $file `echo $file | sed 's/pda7/pda4/'`; done
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>for file in `ls sama5d3*revc_pda7*dts`; do; cp $file `echo $file | sed 's/pda7/pda4/'`; done
 </span><span class='line'>
 </span><span class='line'>#！/bin/bash
 </span><span class='line'>for files in `find . -name "u-boot.bin"`
@@ -831,7 +912,8 @@
 </span><span class='line'>        # echo "$files" | sed 's/boot/boot-sd/'
 </span><span class='line'>
 </span><span class='line'>        git mv $files `echo "$files" | sed 's/boot/boot-sd/'`
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>done
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h4>将空格文件夹改名字</h4>
@@ -845,10 +927,13 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>## tesh.sh
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>## tesh.sh
 </span><span class='line'>#!/bin/bash
 </span><span class='line'>_renamed=`echo $1 | sed 's/\ /_/'`
-</span><span class='line'>mv "$1" $_renamed</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>mv "$1" $_renamed
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -857,7 +942,10 @@
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>chmod +x test.sh</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>chmod +x test.sh
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -866,27 +954,39 @@
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find . -maxdepth 1 -type d -name '* *'|  xargs -n 1 -I {} ./tesh.sh {}</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>find . -maxdepth 1 -type d -name '* *'|  xargs -n 1 -I {} ./tesh.sh {}
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>!! 上一条命令</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo !!</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>sudo !!
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>cd - 上一个目录</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd -</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>cd -
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>ssh</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 连上melon并执行一条命令
-</span><span class='line'>ssh melon cat ~/work/env.sh</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># 连上melon并执行一条命令
+</span><span class='line'>ssh melon cat ~/work/env.sh
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>ssh用法</h3>
@@ -902,12 +1002,15 @@ ssh -vvv</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>user=josh
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>user=josh
 </span><span class='line'>sudo adduser $user sudo
 </span><span class='line'>sudo adduser $user dialout
 </span><span class='line'>
 </span><span class='line'>echo "$user ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$user
-</span><span class='line'>sudo chmod 440 /etc/sudoers.d/$user</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>sudo chmod 440 /etc/sudoers.d/$user
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>文件/目录属性设置</h2>
@@ -918,8 +1021,11 @@ ssh -vvv</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># -R 表示包含所有子目录
-</span><span class='line'>chmod -R o+rx xxx_path/</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># -R 表示包含所有子目录
+</span><span class='line'>chmod -R o+rx xxx_path/
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>cut用法</h2>
@@ -936,7 +1042,9 @@ ssh -vvv</p>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># cut: 
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># cut: 
 </span><span class='line'># -f 和 -d要一起用
 </span><span class='line'>#  -f num :第几个字段
 </span><span class='line'>#  -d:  以:为分隔符
@@ -945,7 +1053,8 @@ ssh -vvv</p>
 </span><span class='line'>
 </span><span class='line'>git grep video= | cut -d: -f 1 | uniq
 </span><span class='line'>
-</span><span class='line'>echo "$BOARD_DIRS" | cut -d\ -f 1</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>echo "$BOARD_DIRS" | cut -d\ -f 1
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>nm 列出.so .a文件里面的所有函数</h2>
@@ -957,11 +1066,14 @@ ssh -vvv</p>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># dpkg查找pakage安装的文件
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'># dpkg查找pakage安装的文件
 </span><span class='line'>dpkg -L &lt;包名&gt;
 </span><span class='line'>
 </span><span class='line'># dpkg通过文件查找对应得安装包
-</span><span class='line'>dpkg -S &lt;文件path&gt;</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>dpkg -S &lt;文件path&gt;
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>管道命令重定向</h2>
@@ -977,7 +1089,9 @@ ssh -vvv</p>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>stdin (0)
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>stdin (0)
 </span><span class='line'>stdout (1)
 </span><span class='line'>stderr (2)
 </span><span class='line'>
@@ -985,7 +1099,8 @@ ssh -vvv</p>
 </span><span class='line'>command2 -f -z -y &gt; out.txt 2&gt; err.txt
 </span><span class='line'>
 </span><span class='line'>command1 &gt; everything.txt 2&gt;&1
-</span><span class='line'>command1 -arg &gt; everything.txt 2&gt;&1</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>command1 -arg &gt; everything.txt 2&gt;&1
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>crontab命令</h2>
@@ -996,18 +1111,24 @@ ssh -vvv</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -l
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>crontab -l
 </span><span class='line'>crontab -e
 </span><span class='line'># 分 时 日 月 周
 </span><span class='line'>  10 5  *  *  0 /home/fred/foo.ksh  # 每周日5点10分
 </span><span class='line'># 分       时 日 月 周
-</span><span class='line'>  [1-10]/3 23 1  8  *   xxx.sh      # 8月1日, 23点的1, 4, 7, 10分执行</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  [1-10]/3 23 1  8  *   xxx.sh      # 8月1日, 23点的1, 4, 7, 10分执行
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>下面设置一条命令，每天早上5点会fetch git repo</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>0 5 * * * ~/work/at91/kernel/fetch_all.sh &gt;&gt; ~/work/at91/kernel/runlog.txt 2&gt;&1</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>0 5 * * * ~/work/at91/kernel/fetch_all.sh &gt;&gt; ~/work/at91/kernel/runlog.txt 2&gt;&1
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>fetch_all.sh的脚步内容</p>
@@ -1024,7 +1145,9 @@ ssh -vvv</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>#!/bin/sh
 </span><span class='line'>TOP_DIR="~/work/at91/kernel"
 </span><span class='line'>PATH=$PATH:/home/josh/bin
 </span><span class='line'>cd ~/work/at91/kernel/linuxs
@@ -1046,13 +1169,19 @@ ssh -vvv</p>
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(CRON) info (No MTA installed, discarding output</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>(CRON) info (No MTA installed, discarding output
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>这样的话，可以按照postfix</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install postfix</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>sudo apt-get install postfix
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -1062,8 +1191,11 @@ ssh -vvv</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// @ubuntu 14.04
-</span><span class='line'>sudo service cron restart</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>// @ubuntu 14.04
+</span><span class='line'>sudo service cron restart
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>日期和时间戳转换函数</h2>
@@ -1088,7 +1220,9 @@ ssh -vvv</p>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>➜  whitedwarf:zigbee-3.0 git:(develop) ✗ date
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>➜  whitedwarf:zigbee-3.0 git:(develop) ✗ date
 </span><span class='line'>2017年 01月 10日 星期二 15:35:25 CST
 </span><span class='line'>➜  whitedwarf:zigbee-3.0 git:(develop) ✗ date +%s
 </span><span class='line'>1484033731
@@ -1107,7 +1241,8 @@ ssh -vvv</p>
 </span><span class='line'>1970年 01月 01日 星期四 08:00:00 CST
 </span><span class='line'>➜  whitedwarf:zigbee-3.0 git:(develop) ✗ date -d "@4294967296"
 </span><span class='line'>2106年 02月 07日 星期日 14:28:16 CST
-</span><span class='line'>➜  whitedwarf:zigbee-3.0 git:(develop) ✗ </span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>➜  whitedwarf:zigbee-3.0 git:(develop) ✗ 
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>日期格式</h2>
@@ -1117,11 +1252,14 @@ ssh -vvv</p>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ date "+%Y/%m/%d %H:%M:%S"
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>$ date "+%Y/%m/%d %H:%M:%S"
 </span><span class='line'>2017/07/11 12:38:47
 </span><span class='line'>
 </span><span class='line'>$ date -u "+%Y/%m/%d %H:%M:%S UTC"
-</span><span class='line'>2017/07/11 04:39:35 UTC</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>2017/07/11 04:39:35 UTC
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>shell脚本控制命令行颜色</h2>
@@ -1131,7 +1269,10 @@ ssh -vvv</p>
 <h2>源文件代码行数的计算</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cloc --no3 --by-file-by-lang</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>cloc --no3 --by-file-by-lang
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>正则表达式</h2>
@@ -1144,7 +1285,10 @@ ssh -vvv</p>
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[ ] \ ^ $ . | ? * + ( )</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>[ ] \ ^ $ . | ? * + ( )
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -1191,7 +1335,8 @@ ssh -vvv</p>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>
 </span><span class='line'># 删除(到行尾的所有内容， $表示到行末，^表示从行首开始。
-</span><span class='line'>echo "josh(fdfd)" | sed 's/(.*$//'</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>echo "josh(fdfd)" | sed 's/(.*$//'
+</span></code></pre></td></tr></table></div></figure>
 
 
 
