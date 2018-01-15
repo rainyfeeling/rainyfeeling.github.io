@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Image Gallery</title>
+    <title>英语数字默写</title>
     <script type="text/javascript" src="/javascripts/vue.js"></script>
     <link rel="stylesheet" href="styles/layout.css" type="text/css" media="screen" />
 </head>
@@ -138,6 +138,11 @@
         this.count();
     }
 
+    var x = new string_player();
+    document.addEventListener('touchstart', function() {
+        x.play();
+    }, false);
+
     var app5 = new Vue({
         el: '#app-5',
         data: {
@@ -149,7 +154,6 @@
                 var NUMBERS = 4;
                 var str = '';
                 var number;
-                var x = new string_player();
 
                 for (i = 0; i < NUMBERS; i++) {
                     number = randomNum();
