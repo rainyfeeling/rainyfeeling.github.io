@@ -140,6 +140,11 @@
 
     var x = new string_player();
     document.addEventListener('touchstart', function() {
+        alert("touch start event");
+        x.play();
+    }, false);
+    document.addEventListener('mouseup', function() {
+        alert("mouse up event");
         x.play();
     }, false);
 
