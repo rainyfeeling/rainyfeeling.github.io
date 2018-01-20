@@ -84,7 +84,7 @@
     function string_player() {
         this.name = "";
         this.index = 0;
-        this.interval = 1000;
+        this.interval = 1500;
 
         this.songs = new Array();
     }
@@ -92,7 +92,7 @@
     string_player.prototype.check_next = function() {
         // check if the array is empty. if not empty then play next string.
         if (this.songs.length != 0) {
-            this.delay_play(this.songs.shift(), 2000);
+            this.delay_play(this.songs.shift(), 3000);
         }
 
         return;
@@ -141,12 +141,12 @@
 
     var x = new string_player();
     document.addEventListener('touchstart', function() {
-        alert("touch start event");
-        x.play();
+        //alert("touch start event");
+        //x.play();
     }, false);
     document.addEventListener('mouseup', function() {
-        alert("mouse up event");
-        x.play();
+        //alert("mouse up event");
+        //x.play();
     }, false);
 
     var app5 = new Vue({
