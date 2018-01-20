@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/layout.css" type="text/css" media="screen" />
 </head>
 
-<body>
+<body onload="registerPlayer()">
     <h1>英语数字和字母默写工具</h1>
 
     <p id="description">{{ message }}</p>
@@ -16,42 +16,9 @@
         <p>{{ message }}</p>
         <button v-on:click="reverseMessage">生成随机数</button>
     </div>
-    <audio id="mp3_1" src="/assets/mp3/1.mp3" />
-    <audio id="mp3_2" src="/assets/mp3/2.mp3" />
-    <audio id="mp3_3" src="/assets/mp3/3.mp3" />
-    <audio id="mp3_4" src="/assets/mp3/4.mp3" />
-    <audio id="mp3_5" src="/assets/mp3/5.mp3" />
-    <audio id="mp3_6" src="/assets/mp3/6.mp3" />
-    <audio id="mp3_7" src="/assets/mp3/7.mp3" />
-    <audio id="mp3_8" src="/assets/mp3/8.mp3" />
-    <audio id="mp3_9" src="/assets/mp3/9.mp3" />
-    <audio id="mp3_0" src="/assets/mp3/0.mp3" />
-    <audio id="mp3_a" src="/assets/mp3/a.mp3" />
-    <audio id="mp3_b" src="/assets/mp3/b.mp3" />
-    <audio id="mp3_c" src="/assets/mp3/c.mp3" />
-    <audio id="mp3_d" src="/assets/mp3/d.mp3" />
-    <audio id="mp3_e" src="/assets/mp3/e.mp3" />
-    <audio id="mp3_f" src="/assets/mp3/f.mp3" />
-    <audio id="mp3_g" src="/assets/mp3/g.mp3" />
-    <audio id="mp3_h" src="/assets/mp3/h.mp3" />
-    <audio id="mp3_i" src="/assets/mp3/i.mp3" />
-    <audio id="mp3_j" src="/assets/mp3/j.mp3" />
-    <audio id="mp3_k" src="/assets/mp3/k.mp3" />
-    <audio id="mp3_l" src="/assets/mp3/l.mp3" />
-    <audio id="mp3_m" src="/assets/mp3/m.mp3" />
-    <audio id="mp3_n" src="/assets/mp3/n.mp3" />
-    <audio id="mp3_o" src="/assets/mp3/o.mp3" />
-    <audio id="mp3_p" src="/assets/mp3/p.mp3" />
-    <audio id="mp3_q" src="/assets/mp3/q.mp3" />
-    <audio id="mp3_r" src="/assets/mp3/r.mp3" />
-    <audio id="mp3_s" src="/assets/mp3/s.mp3" />
-    <audio id="mp3_t" src="/assets/mp3/t.mp3" />
-    <audio id="mp3_u" src="/assets/mp3/u.mp3" />
-    <audio id="mp3_v" src="/assets/mp3/v.mp3" />
-    <audio id="mp3_w" src="/assets/mp3/w.mp3" />
-    <audio id="mp3_x" src="/assets/mp3/x.mp3" />
-    <audio id="mp3_y" src="/assets/mp3/y.mp3" />
-    <audio id="mp3_z" src="/assets/mp3/z.mp3" />
+    <audio controls>
+        <source id="player" src="/assets/mp3/ready.mp3" type="audio/mpeg" />
+    </audio>
 </body>
 
 </html>
@@ -74,81 +41,79 @@
         return str;
     }
 
-    function play(name) {
-        var aud_name = "mp3_" + name;
-        var aud = document.getElementById(aud_name);
-        aud.load();
-        aud.play();
-    }
+    function playNextNumber() {
+        var player = document.getElementsById('player');
 
-    function string_player() {
-        this.name = "";
-        this.index = 0;
-        this.interval = 1500;
-
-        this.songs = new Array();
-    }
-
-    string_player.prototype.check_next = function() {
-        // check if the array is empty. if not empty then play next string.
-        if (this.songs.length != 0) {
-            this.delay_play(this.songs.shift(), 3000);
+        if (!y.is_empty()) {
+            var str = y.next();
+            player.src = "/assets/mp3/" + str + ".mp3";
+            player.play();
         }
-
-        return;
+    }
+    function registerPlayer() {
+        var player = document.getElementsById('player');
+        player.addEventListener('ended', playNextNumber, false);
     }
 
-    string_player.prototype.count = function() {
-        if (this.name == "" || this.name == null) {
-            this.check_next();
-            return;
-        }
+    // -------------------
+    // numbers_array class
+    // -------------------
 
-        if (this.index == this.name.length) {
-            this.check_next();
-            return;
-        }
+    // numbers array is data object.
+    function numbers_array() {
+        this.num = "";
+        this.idx = 0;
+        this.arr = new Array();
 
-        play(this.name[this.index]);
-        this.index++;
-
-        setTimeout(() => {
-            this.count();
-        }, this.interval);
+        this._begin = true;
     }
 
-    string_player.prototype.delay_play = function(song, delay) {
-        if (song != "" && song != null)
+    numbers_array.prototype.pop_from_array = function() {
+        if (this.arr.length != 0)
         {
-            this.name = song;
-            this.index = 0;
+            this.num = this.arr.shift();
+            this.idx = 0;
         }
-
-        setTimeout(() => {
-            this.count();
-        }, delay);
     }
 
-    string_player.prototype.play = function(song) {
-        if (song != "" && song != null)
-        {
-            this.name = song;
-            this.index = 0;
-        }
-
-        this.count();
+    // -------------------
+    // Exported functions
+    //
+    numbers_array.prototype.is_empty = function() {
+        if (this.idx >= this.num.length && this.arr.length == 0)
+            return true;
     }
 
-    var x = new string_player();
-    document.addEventListener('touchstart', function() {
-        alert("touch start event");
-        x.play();
-    }, false);
-    document.addEventListener('mouseup', function() {
-        alert("mouse up event");
-        x.play();
-    }, false);
+    // cannot add a empty string.
+    numbers_array.prototype.add = function(str) {
+        if (str != null && str != "")
+            this.arr.push(str);
+    }
 
+    // return one next letter. If it's empty, return "".
+    numbers_array.prototype.next = function() {
+        var ret = "";
+
+        if (this.is_empty())
+            return ret;
+
+        // if current num is empty, then pop from the array.
+        if (this.idx >= this.num.length)
+            this.pop_from_array();
+
+        if (this.idx < this.num.length) {
+            ret = this.num[this.idx];
+            this._begin = (this.idx == 0);
+            this.idx++;
+        }
+
+        return ret;
+    }
+    numbers_array.prototype.is_begin = function() {
+        return this._begin;
+    }
+
+    var y = new numbers_array();
     var app5 = new Vue({
         el: '#app-5',
         data: {
@@ -165,14 +130,13 @@
                     number = randomNum();
 
                     // one number will read twice.
-                    x.songs.push(number);
-                    x.songs.push(number);
+                    y.add(number);
+                    y.add(number);
 
                     str += number + ' ';
                 }
 
                 this.message = str;
-                x.play();
             }
         }
     })
