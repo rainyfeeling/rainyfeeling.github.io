@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 十八里坡－ 客栈]]></title>
   <link href="http://rainyfeeling.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://rainyfeeling.github.io/"/>
-  <updated>2018-01-21T18:35:16+08:00</updated>
+  <updated>2020-09-14T21:34:40+08:00</updated>
   <id>http://rainyfeeling.github.io/</id>
   <author>
     <name><![CDATA[十八]]></name>
@@ -90,7 +90,7 @@ Regenerating: 1 file(s) changed at 2017-06-11 10:20:43 ...done in 0.44646012 sec
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ubuntu 14.04上安装Octopress]]></title>
+    <title type="html"><![CDATA[Ubuntu 14.04/18.04上安装Octopress]]></title>
     <link href="http://rainyfeeling.github.io/blog/2017/05/28/ubuntu-14-dot-04shang-an-zhuang-octopress/"/>
     <updated>2017-05-28T22:47:29+08:00</updated>
     <id>http://rainyfeeling.github.io/blog/2017/05/28/ubuntu-14-dot-04shang-an-zhuang-octopress</id>
@@ -140,6 +140,8 @@ Bundler version 1.15.0
 <p><code>Gemfile</code>: Gemfile里面包括批量的gem, 而且可以指定依赖关系和版本要求。
     <code>bundle install</code>读取当前目录的Gemfile来安装里面指定的gems</p>
 
+<p><code>Gemfile.lock</code>: Gemfile.lock是生成的文件，里面包括当前环境相关路径信息。如果在不同的环境下这个文件需要重新生成</p>
+
 <p><code>rake</code>: 一个ruby应用，通过gem可以安装，是ruby in rail里的组件。可以理解成linux里面的make</p>
 
 <p><code>rakefile</code>: 很像makefile，指定rake执行的任务</p>
@@ -163,10 +165,15 @@ Release:        14.04
 Codename:       trusty
 </code>
 ruby版本1.9.3
-<code>
-➜  octopress ruby --version
-ruby 1.9.3p484 (2013-11-22 revision 43786) [x86_64-linux]
-</code></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>➜  sudo apt-get install ruby-dev&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;➜  octopress ruby <span class="p">&amp;</span>ndash<span class="p">;</span>version
+</span><span class='line'>ruby 1.9.3p484 <span class="o">(</span>2013-11-22 revision 43786<span class="o">)</span> <span class="o">[</span>x86_64-linux<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <h3>步骤</h3>
 
@@ -229,6 +236,8 @@ ruby 1.9.3p484 (2013-11-22 revision 43786) [x86_64-linux]
 <span class='line-number'>56</span>
 <span class='line-number'>57</span>
 <span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>➜  git clone git://github.com/imathis/octopress.git
 </span><span class='line'>➜  <span class="nb">cd </span>octopress&lt;/p&gt;
 </span><span class='line'>
@@ -244,11 +253,13 @@ ruby 1.9.3p484 (2013-11-22 revision 43786) [x86_64-linux]
 </span><span class='line'>
 </span><span class='line'>&lt;p&gt;➜  gem install bundle&lt;/p&gt;
 </span><span class='line'>
+</span><span class='line'>&lt;h1&gt;NOTE: 可以安装指定的版本，比如: &lt;code&gt;gem install rake -v 10.5.0&lt;/code&gt;&lt;/h1&gt;
+</span><span class='line'>
 </span><span class='line'>&lt;h1&gt;根据Gemfile来安装相应的依赖。&lt;/h1&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;p&gt;➜  bundle install&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1&gt;NOTE: 我遇到了有一个插件要求ruby 2.0.0，但是我的版本是1.9.3。但是重新运行了几次就成功了？！&lt;/h1&gt;
+</span><span class='line'>&lt;h1&gt;NOTE: 在ubuntu 18.04版本上, 由于rake的版本不一样，在执行&lt;code&gt;rake&lt;/code&gt;命令的时候需要执行&lt;code&gt;bundler <span class="nb">exec </span>rake&lt;/code&gt;&lt;/h1&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;pre&gt;&lt;code&gt;
 </span><span class='line'><span class="c">## 3. 配置Octopress</span>
